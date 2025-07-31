@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +35,7 @@
         const container = document.getElementById("card-container");
         const popup = document.getElementById("popup");
 
-        container.style.display = 'flex';  //put cards on center
+        container.style.display = 'flex';
         container.style.flexWrap = 'wrap';
         container.style.justifyContent = 'center';
         container.style.gap = '20px';
@@ -80,22 +81,21 @@
             card.appendChild(desc);
             container.appendChild(card);
 
-            
-            card.addEventListener('click', () => {                                                            // jab click ho toh ye kaam karna 
+            card.addEventListener('click', () => {
                 popup.innerHTML = `
-        <div style="
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            width: 280px;
-            text-align: center;
-        ">
-            <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 160px; object-fit: cover; border-radius: 5px;" />
-            <h3 style="margin: 10px 0;">${product.name}</h3>
-            <p style="font-size: 14px; color: #444;">${product.description}</p>
-            <button onclick="document.getElementById('popup').style.display='none'" style="margin-top: 10px; padding: 6px 12px;">Close</button>
-        </div>
-        `;
+                    <div style="
+                        background: white;
+                        padding: 15px;
+                        border-radius: 8px;
+                        width: 280px;
+                        text-align: center;
+                    ">
+                        <img src="${product.image}" alt="${product.name}" style="width: 100%; height: 160px; object-fit: cover; border-radius: 5px;" />
+                        <h3 style="margin: 10px 0;">${product.name}</h3>
+                        <p style="font-size: 14px; color: #444;">${product.description}</p>
+                        <button onclick="document.getElementById('popup').style.display='none'" style="margin-top: 10px; padding: 6px 12px;">Close</button>
+                    </div>
+                `;
 
                 popup.style.position = 'fixed';
                 popup.style.top = '0';
@@ -106,6 +106,169 @@
                 popup.style.display = 'flex';
                 popup.style.justifyContent = 'center';
                 popup.style.alignItems = 'center';
+            });
+        });
+    </script>
+</body>
+
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Image Cards</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 200vh;
+            background-image: url('https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid gray;
+            padding: 10px;
+            margin: 10px;
+            width: 250px;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .card h3 {
+            margin: 10px 0 5px;
+            font-size: 18px;
+            color: #222;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            width: 280px;
+            text-align: center;
+        }
+
+        .popup-content img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .popup-content h3 {
+            margin: 10px 0;
+        }
+
+        .popup-content p {
+            font-size: 14px;
+            color: #444;
+        }
+
+        .popup-content button {
+            margin-top: 10px;
+            padding: 6px 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Product Cards</h1>
+
+    <div id="card-container" class="container"></div> <!--this is the container which stores card for the page -->
+    <div id="popup" class="popup"></div> <!-- for popup we made empty divison-->
+
+    <script>
+        const products = [
+            {
+                name: "Wireless Earbuds",
+                image: "https://images.pexels.com/photos/16703772/pexels-photo-16703772.jpeg",
+                description: "Compact Bluetooth earbuds with deep bass."
+            },
+            {
+                name: "Smart Watch",
+                image: "https://images.pexels.com/photos/12999401/pexels-photo-12999401.jpeg",
+                description: "Track fitness, calls, and messages."
+            },
+            {
+                name: "Bluetooth Speaker",
+                image: "https://www.bhphotovideo.com/images/images2500x2500/jbl_jblgo3bluam_go_3_portable_bluetooth_1583007.jpg",
+                description: "Waterproof speaker with deep sound."
+            }
+        ];
+
+        const container = document.getElementById("card-container"); // we are accessing container in js 
+        const popup = document.getElementById("popup");
+
+        products.forEach(product => {
+            const card = document.createElement("div");  //for every product new div created..we are giving class cardto each div
+            card.className = "card";  // Connects to .card in CSS
+
+            const img = document.createElement("img"); //for every product image we are creating image element. and we are setting src and alt. data here comes from product array.
+            img.src = product.image;
+            img.alt = product.name;
+
+            const title = document.createElement("h3"); //for every product we are creating title element.where we have product name
+            title.innerText = product.name;
+
+            const desc = document.createElement("p"); //for every product we are creating description element.
+            desc.innerText = product.description;
+
+            card.appendChild(img);
+            card.appendChild(title);
+            card.appendChild(desc);
+            container.appendChild(card); // every card is inserted in the container
+
+            card.addEventListener("click", () => {
+                popup.innerHTML = `
+        <div class="popup-content">
+            <img src="${product.image}" alt="${product.name}" />
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <button onclick="document.getElementById('popup').style.display='none'">Close</button>
+        </div>
+        `;
+                popup.style.display = "flex";
             });
         });
     </script>
